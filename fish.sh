@@ -28,13 +28,15 @@ yesfish || error "Exiting"
 
 
 installfish(){ \
-  sudo dnf install fish
+  sudo dnf install fish util-linux-user 
 
   }
 installfish || error "Failed installing fish"
 
 setfish(){ \
-  echo /usr/bin/fish | sudo tee -a /etc/shells && chsh -s /usr/bin/fish
+  echo /usr/bin/fish | sudo tee -a /etc/shells
+
+   chsh -s /usr/bin/fish
 
   }
 setfish || error "Failed to set fish as default shell"
