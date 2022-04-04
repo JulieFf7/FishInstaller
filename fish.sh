@@ -17,7 +17,7 @@ sudo dnf install dialog util-linux-user || error "Failed installing dependencies
 
 
 welcome(){ \
-  dialog --colors --title "Welcome" -msgbox "This scrypt will install fish and set is as your deafault shell. Note that this is only for Fedora linux. Do not run this scrypt as root " 16 60
+  dialog --colors --title "Welcome" --msgbox "This scrypt will install fish and set is as your deafault shell. Note that this is only for Fedora linux. Do not run this scrypt as root " 16 60
 
   dialog --colors --title "Welcome" --yes-label "Yes" --no-label "Exit" --yesno "Do you want to continue?" 8 80
 
@@ -34,7 +34,7 @@ yesfish || error "Exiting"
 
 
 installfish(){ \
-  sudo dnf install fish util-linux-user
+  sudo dnf install fish 
 
   }
 installfish || error "Failed installing fish"
@@ -54,7 +54,7 @@ installomf(){ \
 installomf || error "Failed to install omf"
 
 
-dialog --colors --title "The end" --msgbox "After exiting relaunch your terminal and you should be in fish. If you want to set different theme you can do it with the commands: \n \n omf install .yourtheme. \n omf theme .yourtheme. \n \n You can list available theme with the command: \n \n omf theme" 16 80  
+dialog --colors --title "The end" --msgbox "After exiting relaunch your terminal and you should be in fish. If you want to set different theme you can do it with the commands: \n \n omf install .yourtheme. \n omf theme .yourtheme. \n \n You can list available theme with the command: \n \n omf theme" 16 80
 
 
 
