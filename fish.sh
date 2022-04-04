@@ -3,6 +3,12 @@
 error() { \
     clear; printf "ERROR:\\n%s\\n" "$1" >&2; exit 1;
 }
+bye(){ \
+dialog --colors --title "The end" --msgbox "Thanks for using my script. <3" 16 60
+
+exit
+}
+
 
 echo "######################################################"
 echo "#####        Installing dependencies            ######"
@@ -39,7 +45,7 @@ setfish(){ \
   }
 setfish || error "Failed to set fish as default shell"
 
-dialog --colors --title "OMF" --yes-label "Yes" --no-label "Exit" --yesno "Do you want to install oh my fish ? (Themes)" 8 80 
+dialog --colors --title "OMF" --yes-label "Yes" --no-label "Exit" --yesno "Do you want to install oh my fish ? (Themes)" 8 80 || bye
 
 installomf(){ \
   curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install
@@ -47,15 +53,16 @@ installomf(){ \
   }
 installomf || error "Failed to install omf"
 
-dialog --colors --title "The end" --msgbox "After exiting relaunch your terminal and you should be in fish. If you want to set different theme you can do it with the commands: \n \n omf install .yourtheme. \n omf theme .yourtheme. \n \n You can list available theme with the command: \n \n omf theme" 16 80
+
+dialog --colors --title "The end" --msgbox "After exiting relaunch your terminal and you should be in fish. If you want to set different theme you can do it with the commands: \n \n omf install .yourtheme. \n omf theme .yourtheme. \n \n You can list available theme with the command: \n \n omf theme" 16 80  
 
 
 
 
 
-echo  " ██╗██╗   ██╗██╗     ██╗███████╗███████╗███████╗███████╗███████╗██╗   ██╗███████╗███╗   ██╗
+"       ██╗██╗   ██╗██╗     ██╗███████╗███████╗███████╗███████╗███████╗██╗   ██╗███████╗███╗   ██╗
         ██║██║   ██║██║     ██║██╔════╝██╔════╝██╔════╝██╔════╝██╔════╝██║   ██║██╔════╝████╗  ██║
         ██║██║   ██║██║     ██║█████╗  █████╗  █████╗  ███████╗█████╗  ██║   ██║█████╗  ██╔██╗ ██║
    ██   ██║██║   ██║██║     ██║██╔══╝  ██╔══╝  ██╔══╝  ╚════██║██╔══╝  ╚██╗ ██╔╝██╔══╝  ██║╚██╗██║
    ╚█████╔╝╚██████╔╝███████╗██║███████╗██║     ██║     ███████║███████╗ ╚████╔╝ ███████╗██║ ╚████║
-    ╚════╝  ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝     ╚═╝     ╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝  "
+    ╚════╝  ╚═════╝ ╚══════╝╚═╝╚══════╝╚═╝     ╚═╝     ╚══════╝╚══════╝  ╚═══╝  ╚══════╝╚═╝  ╚═══╝
