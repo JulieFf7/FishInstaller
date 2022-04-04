@@ -5,9 +5,9 @@ error() { \
 }
 
 echo "######################################################"
-echo "#####        Installing dialog if needed        ######"
+echo "#####        Installing dependencies            ######"
 echo "######################################################"
-sudo dnf install dialog || error "Failed installing dialog"
+sudo dnf install dialog util-linux-user || error "Failed installing dependencies"
 
 
 welcome(){ \
@@ -28,7 +28,8 @@ yesfish || error "Exiting"
 
 
 installfish(){ \
-  sudo dnf install fish util-linux-user 
+
+  sudo dnf install fish 
 
   }
 installfish || error "Failed installing fish"
@@ -41,8 +42,10 @@ setfish(){ \
   }
 setfish || error "Failed to set fish as default shell"
 
+dialog --colors --title "OMF" --yes-label "Yes" --no-label "Exit" --yesno "Do you want to install oh my fish ? (Themes)" 8 80 
+
 installomf(){ \
-  curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
+  curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install
 
   }
 installomf || error "Failed to install omf"
