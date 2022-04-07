@@ -9,11 +9,30 @@ dialog --colors --title "The end" --msgbox "Thanks for using my script. <3" 16 6
 exit
 }
 
+echo "What distribution are you running?"
+echo "1. Fedora"
+echo "2. Arch"
 
-echo "######################################################"
-echo "#####        Installing dependencies            ######"
-echo "######################################################"
-sudo dnf install dialog util-linux-user || error "Failed installing dependencies"
+read -p "Enter just the number:" distribution
+
+if [ $distribution == 1 ]
+  then
+    echo "######################################################"
+    echo "#####        Installing dependencies            ######"
+    echo "######################################################"
+    sudo dnf install dialog util-linux-user || error "Failed installing dependencies"
+
+  else
+    if [ $distribution == 2 ]
+      then
+        echo "######################################################"
+        echo "#####        Installing dependencies            ######"
+        echo "######################################################"
+        sudo pacman -S install dialog util-linux-user || error "Failed installing dependencies"
+      else
+        error "Nothing"
+    fi
+fi
 
 
 welcome(){ \
@@ -25,7 +44,6 @@ welcome(){ \
 welcome || error "Exiting"
 
 
-
 yesfish(){ \
   dialog --colors --title "Fish" --yes-label "Yes" --no-label "Exit" --yesno "Do you want to install Fish?" 8 80
 
@@ -34,10 +52,21 @@ yesfish || error "Exiting"
 
 
 installfish(){ \
-  sudo dnf install fish 
+  if [ $distribution == 1 ]
+    then
+      sudo dnf install fish
+    else
+      if [ $distribution == 2 ]
+        then
+          sudo pacman -S fish
+        else
+          error "Nothing"
+        fi
+      fi
 
   }
 installfish || error "Failed installing fish"
+
 
 setfish(){ \
   echo /usr/bin/fish | sudo tee -a /etc/shells && chsh -s /usr/bin/fish
